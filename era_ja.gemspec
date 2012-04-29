@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- encoding: utf-8; mode: ruby -*-
 require File.expand_path('../lib/era_ja/version', __FILE__)
 
 Gem::Specification.new do |gem|
