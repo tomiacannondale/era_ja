@@ -14,4 +14,9 @@ Gem::Specification.new do |gem|
   gem.name          = "era_ja"
   gem.require_paths = ["lib"]
   gem.version       = EraJa::VERSION
+
+  gem.add_development_dependency "rake", '>= 0.9.2'
+  gem.add_development_dependency 'rspec', '>= 2.9.0'
+  gem.add_development_dependency 'growl', '>= 1.0.3'
+  gem.add_development_dependency "guard-rspec", '>= 0.7.0'
 end
