@@ -4,9 +4,9 @@ require File.expand_path('../lib/era_ja/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["tomi"]
   gem.email         = ["tomiacannondale@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Convert to Japanese era.}
+  gem.summary       = %q{Convert Date or Time instance to String of Japanese era.}
+  gem.homepage      = "https://github.com/tomiacannondale/era_ja"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
