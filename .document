@@ -1,0 +1,5 @@
+lib/**/*.rb
+-
+README.md
+README.ja.md
+LICENSE
