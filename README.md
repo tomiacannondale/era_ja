@@ -21,12 +21,14 @@ Or install it yourself as:
 ### Time instance to japanese era
 
 ```ruby
+	require 'era_ja/time'
 	Time.mktime(2012,4,29).to_era   # => "H24.4.29"
 ```
 
 ### Date instance to japanese era
 
 ```ruby
+	require 'era_ja/date'
 	Date.new(2012,4,29).to_era     # => "H24.4.29"
 ```
 

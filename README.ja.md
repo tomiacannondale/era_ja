@@ -21,12 +21,14 @@
 ### Timeインスタンスを和暦に変換します。
 
 ```ruby
+	require 'era_ja/time'
 	Time.mktime(2012,4,29).to_era   # => "H24.4.29"
 ```
 
 ### Dateインタンスを和暦に変換します。
 
 ```ruby
+	require 'era_ja/date'
 	Date.new(2012,4,29).to_era     # => "H24.4.29"
 ```
 
