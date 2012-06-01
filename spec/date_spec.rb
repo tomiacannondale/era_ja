@@ -8,6 +8,8 @@ describe Date do
     context "date is 2012,4,29" do
       subject { Date.new(2012,4,29) }
       include_examples "should equal 'H24.4.29'"
+      include_examples "should equal '平成24.4.29'"
+      include_examples "should equal '24.4.29'"
     end
 
     context "date is 1989,1,8" do
@@ -19,6 +21,7 @@ describe Date do
     context "date is 1989,1,7" do
       subject { Date.new(1989,1,7) }
       include_examples "should equal 'S64.1.7'"
+      include_examples "should equal '昭和64.1.7'"
     end
 
     context "date is 1926,12,25" do
@@ -34,11 +37,13 @@ describe Date do
     context "date is 1912,7,30" do
       subject { Date.new(1912,7,30) }
       include_examples "should equal 'T1.7.30'"
+      include_examples "should equal '大正1.7.30'"
     end
 
     context "date is 1912,7,29" do
       subject { Date.new(1912,7,29) }
       include_examples "should equal 'M45.7.29'"
+      include_examples "should equal '明治45.7.29'"
     end
 
     context "date is 1868,9,8" do
