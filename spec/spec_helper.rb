@@ -9,9 +9,9 @@ shared_examples "should equal 'H24.04.29'" do
   end
 end
 
-shared_examples "should equal '平成24.04.29'" do
-  context "with '%O%E.%m.%d'" do
-    it { subject.to_era("%O%E.%m.%d").should eq "平成24.04.29" }
+shared_examples "should equal '平成24年04月29日'" do
+  context "with '%O%E年%m月%d日'" do
+    it { subject.to_era("%O%E年%m月%d日").should eq "平成24年04月29日" }
   end
 end
 
@@ -64,7 +64,7 @@ end
 
 shared_examples "2012,4,29" do
   include_examples "should equal 'H24.04.29'"
-  include_examples "should equal '平成24.04.29'"
+  include_examples "should equal '平成24年04月29日'"
   include_examples "should equal '24.04.29'"
 end
 
