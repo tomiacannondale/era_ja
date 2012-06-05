@@ -18,11 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
+### format string
+
+Strftime format string can be used as an argument.
+
+EraJa#to_era of extra format string is follow.
+
+* %o: era(alphabet)
+* %O: era(kanzi)
+* %E: era year
+
 ### Time instance to japanese era
 
 ```ruby
 	require 'era_ja/time'
 	Time.mktime(2012,4,29).to_era   # => "H24.4.29"
+	Time.mktime(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
 ```
 
 ### Date instance to japanese era
@@ -30,6 +41,7 @@ Or install it yourself as:
 ```ruby
 	require 'era_ja/date'
 	Date.new(2012,4,29).to_era     # => "H24.4.29"
+	Date.new(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
 ```
 
 ## Support

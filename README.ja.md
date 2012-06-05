@@ -18,11 +18,22 @@
 
 ## Usage
 
+### フォーマット文字列
+
+引数としてstftimeのフォーマット文字列を使用出来ます。
+
+EraJa#to_eraメソッドでの追加のフォーマット文字列は以下の通りです。
+
+* %o: 元号(アルファベット)
+* %O: 元号(漢字)
+* %E: 元号の年
+
 ### Timeインスタンスを和暦に変換します。
 
 ```ruby
 	require 'era_ja/time'
 	Time.mktime(2012,4,29).to_era   # => "H24.4.29"
+	Time.mktime(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
 ```
 
 ### Dateインタンスを和暦に変換します。
@@ -30,6 +41,7 @@
 ```ruby
 	require 'era_ja/date'
 	Date.new(2012,4,29).to_era     # => "H24.4.29"
+	Date.new(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
 ```
 
 ## Support
