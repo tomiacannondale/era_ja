@@ -5,6 +5,14 @@ require 'date'
 module EraJa
   ERA = [["M", "明治"], ["T", "大正"], ["S", "昭和"], ["H", "平成"]]
 
+  # Convert to Japanese era.
+  # @param [String] format_string
+  #   Time#strftime format string can be used
+  #   #### extra format string
+  #   * %o - era(alphabet)
+  #   * %O - era(kanzi)
+  #   * %E - era year
+  # @return [String]
   def to_era(format = "%o%E.%m.%d")
     format.sub!(/%o/i) { |m| m + ' ' }
     @era_format = format[/%o/i]
