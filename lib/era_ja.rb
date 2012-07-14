@@ -15,17 +15,18 @@ module EraJa
   # @return [String]
   def to_era(format = "%o%E.%m.%d")
     format.sub!(/%o/i) { |m| m + ' ' }
+    format.sub!(/%E/) { |m| m + ' ' }
     @era_format = format[/%o/i]
     if self.to_time < ::Time.mktime(1868,9,8)
       raise "#to_era is expeted later in 1968,9,8"
     elsif self.to_time < ::Time.mktime(1912,7,30)
-      strftime(format).sub(/%E/, format_year(year - 1867)).sub(/%o /i) { format_era('M') }
+      strftime(format).sub(/%E /, format_year(year - 1867)).sub(/%o /i) { format_era('M') }
     elsif self.to_time < ::Time.mktime(1926,12,25)
-      strftime(format).sub(/%E/, format_year(year - 1911)).sub(/%o /i) { format_era('T') }
+      strftime(format).sub(/%E /, format_year(year - 1911)).sub(/%o /i) { format_era('T') }
     elsif self.to_time < ::Time.mktime(1989,1,8)
-      strftime(format).sub(/%E/, format_year(year - 1925)).sub(/%o /i) { format_era('S') }
+      strftime(format).sub(/%E /, format_year(year - 1925)).sub(/%o /i) { format_era('S') }
     else
-      strftime(format).sub(/%E/, format_year(year - 1988)).sub(/%o /i) { format_era('H') }
+      strftime(format).sub(/%E /, format_year(year - 1988)).sub(/%o /i) { format_era('H') }
     end
   end
 
