@@ -12,6 +12,7 @@ module EraJa
   #   * %o - era(alphabet)
   #   * %O - era(kanzi)
   #   * %E - era year
+  #   * %J - kanzi number
   # @return [String]
   def to_era(format = "%o%E.%m.%d")
     @era_format = format
