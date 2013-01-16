@@ -33,8 +33,32 @@ shared_examples "should equal '平成240429'" do
   end
 end
 
+shared_examples "should equal '平成二十四年四月二十九日'" do
+  context "with '%O%JE年%Jm月%Jd日'" do
+    it { subject.to_era('%O%JE年%Jm月%Jd日').should eq '平成二十四年四月二十九日' }
+  end
+end
+
+shared_examples "should equal '2012年04月29日'" do
+  context "with '%y年%m月%d日'" do
+    it { subject.to_era('%Y年%m月%d日').should eq '2012年04月29日' }
+  end
+end
+
+shared_examples "should equal '二千十二年四月二十九日'" do
+  context "with '%Jy年%Jm月%Jd日'" do
+    it { subject.to_era('%JY年%Jm月%Jd日').should eq '二千十二年四月二十九日' }
+  end
+end
+
 shared_examples "should equal 'H01.01.08'" do
-  it { subject.to_era.should eq "H01.01.08" }
+  context "without argument" do
+    it { subject.to_era.should eq "H01.01.08" }
+  end
+
+  context "with '%O%JE.%Jm.%Jd'" do
+    it { subject.to_era('%O%JE.%Jm.%Jd').should eq "平成元.一.八" }
+  end
 end
 
 shared_examples "should equal 'S64.01.07'" do
@@ -80,6 +104,9 @@ shared_examples "2012,4,29" do
   include_examples "should equal '24.04.29'"
   include_examples "should equal '2404'"
   include_examples "should equal '平成240429'"
+  include_examples "should equal '2012年04月29日'"
+  include_examples "should equal '平成二十四年四月二十九日'"
+  include_examples "should equal '二千十二年四月二十九日'"
 end
 
 shared_examples "1989,1,8" do
