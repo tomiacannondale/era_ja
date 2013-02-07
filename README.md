@@ -27,6 +27,7 @@ EraJa#to_era of extra format string is follow.
 * %o: era(alphabet)
 * %O: era(kanzi)
 * %E: era year
+* %J: kanzi number
 
 ### Time instance to japanese era
 
@@ -34,6 +35,7 @@ EraJa#to_era of extra format string is follow.
 	require 'era_ja/time'
 	Time.mktime(2012,4,29).to_era   # => "H24.4.29"
 	Time.mktime(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
+	Time.mktime(2012,4,29).to_era("%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
 ```
 
 ### Date instance to japanese era
@@ -42,6 +44,14 @@ EraJa#to_era of extra format string is follow.
 	require 'era_ja/date'
 	Date.new(2012,4,29).to_era     # => "H24.4.29"
 	Date.new(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
+	Date.new(2012,4,29).to_era("%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
+```
+
+### Change number to kansuuzi ###
+
+```ruby
+	Time.mktime(2012,4,29).to_era("%Jy年%Jm月%Jd日") # => "二千十二年四月二十九日"
+	Date.new(2012,4,29).to_era("%Jy年%Jm月%Jd日")    # => "二千十二年四月二十九日"
 ```
 
 ## Support
