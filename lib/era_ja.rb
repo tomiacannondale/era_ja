@@ -22,7 +22,7 @@ module EraJa
     str_time = strftime(@era_format)
     if @era_format =~ /%E/
       if self.to_time < ::Time.mktime(1868,9,8)
-        raise "#to_era is expeted later in 1968,9,8"
+        raise "#to_era is expeted later in 1868,9,8"
       elsif self.to_time < ::Time.mktime(1912,7,30)
         str_time = era_year(year - 1867, 'M')
       elsif self.to_time < ::Time.mktime(1926,12,25)
