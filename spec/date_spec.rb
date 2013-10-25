@@ -48,7 +48,7 @@ describe Date do
 
     context "date is 1868,9,7" do
       it { expect { Date.new(1868,9,7).to_era }.
-        to raise_error(RuntimeError, "#to_era is expeted later in 1968,9,8") }
+        to raise_error(RuntimeError, "#to_era is expeted later in 1868,9,8") }
     end
 
   end
