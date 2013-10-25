@@ -47,8 +47,8 @@ describe Time do
     end
 
     context "time is 1868,9,7" do
-      it { expect { Time.mktime(1868,9,7).to_era }.
-        to raise_error(RuntimeError, "#to_era is expeted later in 1868,9,8") }
+      subject { Time.mktime(1868,9,7) }
+      include_examples "1868,9,7"
     end
 
   end

@@ -97,6 +97,9 @@ shared_examples "should equal 'M01.09.08'" do
   it { subject.to_era.should eq "M01.09.08" }
 end
 
+shared_examples "should raise error" do
+  it { expect {subject.to_era}.to raise_error(RuntimeError, "#to_era is expeted later in 1868,9,8") }
+end
 
 shared_examples "2012,4,29" do
   include_examples "should equal 'H24.04.29'"
@@ -138,4 +141,8 @@ end
 
 shared_examples "1868,9,8" do
   include_examples "should equal 'M01.09.08'"
+end
+
+shared_examples "1868,9,7" do
+  include_examples "should raise error"
 end
