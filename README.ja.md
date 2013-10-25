@@ -16,6 +16,10 @@
 
     $ gem install era_ja
 
+### ruby version ###
+
+era_jaはruby1.9.3とruby2.0.0でテストをしています。
+
 ## Usage
 
 ### フォーマット文字列

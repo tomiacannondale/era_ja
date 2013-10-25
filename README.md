@@ -16,6 +16,10 @@ Or install it yourself as:
 
     $ gem install era_ja
 
+### ruby version ###
+
+era_ja was run test on ruby 1.9.3 and ruby 2.0.0
+
 ## Usage
 
 ### format string
