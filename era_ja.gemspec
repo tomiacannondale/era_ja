@@ -15,9 +15,9 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = EraJa::VERSION
 
-  gem.add_development_dependency "rake", '~> 10.0.3'
-  gem.add_development_dependency 'rspec', '~> 2.12.0'
-  gem.add_development_dependency "guard-rspec", '~> 2.4.0'
+  gem.add_development_dependency "rake", '~> 10.1.0'
+  gem.add_development_dependency 'rspec', '~> 2.14.1'
+  gem.add_development_dependency "guard-rspec", '~> 4.0.3'
   gem.add_development_dependency 'rb-fsevent', '~> 0.9.3'
   gem.add_development_dependency 'terminal-notifier-guard', '~> 1.5.3'
 end
