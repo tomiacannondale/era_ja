@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   gem.name          = "era_ja"
   gem.require_paths = ["lib"]
   gem.version       = EraJa::VERSION
+  gem.license       = "MIT"
 
   gem.add_development_dependency "rake", '~> 10.1.0'
   gem.add_development_dependency 'rspec', '~> 2.14.1'
