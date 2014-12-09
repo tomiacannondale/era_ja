@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-require 'era_ja'
+require 'era_ja/conversion'
 
 class Date
-  include EraJa
+  include EraJa::Conversion
 end
