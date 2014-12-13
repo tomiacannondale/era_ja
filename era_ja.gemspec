@@ -17,8 +17,8 @@ Gem::Specification.new do |gem|
   gem.license       = "MIT"
 
   gem.add_development_dependency "rake", '~> 10.1.0'
-  gem.add_development_dependency 'rspec', '~> 2.14.1'
-  gem.add_development_dependency "guard-rspec", '~> 4.0.3'
-  gem.add_development_dependency 'rb-fsevent', '~> 0.9.3'
-  gem.add_development_dependency 'terminal-notifier-guard', '~> 1.5.3'
+  gem.add_development_dependency 'rspec', '~> 3.1.0'
+  gem.add_development_dependency "guard-rspec", '~> 4.5.0'
+  gem.add_development_dependency 'rb-fsevent', '~> 0.9.4'
+  gem.add_development_dependency 'terminal-notifier-guard', '~> 1.6.4'
 end
