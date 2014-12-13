@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-require File.expand_path('../era_ja', File.dirname(__FILE__))
+require 'era_ja/conversion'
 
 class Time
-  include EraJa
+  include EraJa::Conversion
 end
