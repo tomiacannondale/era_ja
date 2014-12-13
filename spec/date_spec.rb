@@ -2,7 +2,7 @@
 require File.expand_path('../lib/era_ja/date', File.dirname(__FILE__))
 require File.expand_path('spec_helper', File.dirname(__FILE__))
 
-describe Date do
+RSpec.describe Date do
   describe "#to_era" do
 
     context "date is 2012,4,29" do

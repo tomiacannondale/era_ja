@@ -2,7 +2,7 @@
 require File.expand_path('../lib/era_ja/time', File.dirname(__FILE__))
 require File.expand_path('spec_helper', File.dirname(__FILE__))
 
-describe Time do
+RSpec.describe Time do
   describe "#to_era" do
 
     context "time is 2012,4,29" do
