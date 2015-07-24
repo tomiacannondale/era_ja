@@ -45,7 +45,7 @@ module EraJa
         checked_era = key
         checked_era_start = start
       end
-      [year - checked_era_start.year + 1, checked_era]
+      [checked_era, year - checked_era_start.year + 1]
     end
 
     private
