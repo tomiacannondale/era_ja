@@ -98,7 +98,7 @@ RSpec.shared_examples "should equal 'M01.09.08'" do
 end
 
 RSpec.shared_examples "should raise error" do
-  it { expect {subject.to_era}.to raise_error(RuntimeError, "#to_era is expeted later in 1868,9,8") }
+  it { expect {subject.to_era}.to raise_error(RuntimeError, "era_ja gem does'n t work before September 7, 1868.") }
 end
 
 RSpec.shared_examples "2012,4,29" do

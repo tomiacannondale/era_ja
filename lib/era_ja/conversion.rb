@@ -26,23 +26,30 @@ module EraJa
       @era_format.sub!(/%E/) { |m| m + ' ' }
       str_time = strftime(@era_format)
       if @era_format =~ /%E/
-        if self.to_time < ::Time.mktime(1868,9,8)
-          raise "#to_era is expeted later in 1868,9,8"
-        elsif self.to_time < ::Time.mktime(1912,7,30)
-          str_time = era_year(year - 1867, 'M')
-        elsif self.to_time < ::Time.mktime(1926,12,25)
-          str_time = era_year(year - 1911, 'T')
-        elsif self.to_time < ::Time.mktime(1989,1,8)
-          str_time = era_year(year - 1925, 'S')
-        else
-          str_time = era_year(year - 1988, 'H')
-        end
+        str_time = era_year_str(*era_year)
       end
       str_time.gsub(/%J(\d+)/) { to_kanzi($1) }
     end
+    
+    # Get Japanese year.
+    # @return [String, Fixnum] (era_alphabet, era_num)
+    def era_year
+      checked_era = nil
+      checked_era_start = nil
+      ERA.each_pair do |key, arr|
+        _ , start = arr
+        if self.to_time < start
+          raise "era_ja gem does'n t work before September 7, 1868." unless checked_era
+          break
+        end
+        checked_era = key
+        checked_era_start = start
+      end
+      [year - checked_era_start.year + 1, checked_era]
+    end
 
     private
-    def era_year(year, era)
+    def era_year_str(era, year)
       strftime(@era_format).sub(/(%J)?%E /) { format_year(year, $1) }.sub(/%o /i) { format_era(era) }
     end
 
