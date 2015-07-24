@@ -3,7 +3,12 @@ require 'date'
 
 module EraJa
   module Conversion
-    ERA = [["M", "明治"], ["T", "大正"], ["S", "昭和"], ["H", "平成"]]
+    ERA = {
+      'M' => ["明治", ::Time.mktime(1868,9,8)],
+      'T' => ["大正", ::Time.mktime(1912,7,30)],
+      'S' => ["昭和", ::Time.mktime(1926,12,25)],
+      'H' => ["平成", ::Time.mktime(1989,1,8)]
+    }.freeze
 
     # Convert to Japanese era.
     # @param [String] format_string
@@ -43,9 +48,9 @@ module EraJa
 
     def format_era(string)
       if @era_format =~ /%o/
-        return "#{ERA.detect{ |i| i[0] == string}[0]}"
+        return string
       elsif @era_format =~ /%O/
-        return "#{ERA.detect{ |i| i[0] == string}[1]}"
+        return "#{ERA[string][0]}"
       end
     end
 
