@@ -15,7 +15,7 @@ module EraJa
     #   * %J - kanzi number
     # @return [String]
     def to_era(format = "%o%E.%m.%d")
-      @era_format = format
+      @era_format = format.dup
       @era_format.gsub!(/%J/, "%J%")
       @era_format.sub!(/%o/i) { |m| m + ' ' }
       @era_format.sub!(/%E/) { |m| m + ' ' }
