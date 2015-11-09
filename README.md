@@ -38,26 +38,27 @@ EraJa#to_era of extra format string is follow.
 ### Time instance to japanese era
 
 ```ruby
-	require 'era_ja'
-	Time.mktime(2012,4,29).to_era   # => "H24.4.29"
-	Time.mktime(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
-	Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
+require 'era_ja'
+Time.mktime(2012,4,29).to_era   # => "H24.4.29"
+Time.mktime(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
+Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
 ```
 
 ### Date instance to japanese era
 
 ```ruby
-	require 'era_ja'
-	Date.new(2012,4,29).to_era     # => "H24.4.29"
-	Date.new(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
-	Date.new(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
+require 'era_ja'
+Date.new(2012,4,29).to_era     # => "H24.4.29"
+Date.new(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
+Date.new(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
 ```
 
 ### Change number to kansuuzi ###
 
 ```ruby
-	Time.mktime(2012,4,29).to_era("%Jy年%Jm月%Jd日") # => "二千十二年四月二十九日"
-	Date.new(2012,4,29).to_era("%Jy年%Jm月%Jd日")    # => "二千十二年四月二十九日"
+Time.mktime(2012,4,29).to_era("%Jy年%Jm月%Jd日") # => "二千十二年四月二十九日"
+Date.new(2012,4,29).to_era("%Jy年%Jm月%Jd日")    # => "二千十二年四月二十九日"
+```
 
 ### Era names ###
 
