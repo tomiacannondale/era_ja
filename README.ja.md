@@ -37,7 +37,7 @@ EraJa#to_eraメソッドでの追加のフォーマット文字列は以下の�
 ### Timeインスタンスを和暦に変換します。
 
 ```ruby
-	require 'era_ja/time'
+	require 'era_ja'
 	Time.mktime(2012,4,29).to_era   # => "H24.4.29"
 	Time.mktime(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
 	Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
@@ -46,7 +46,7 @@ EraJa#to_eraメソッドでの追加のフォーマット文字列は以下の�
 ### Dateインタンスを和暦に変換します。
 
 ```ruby
-	require 'era_ja/date'
+	require 'era_ja
 	Date.new(2012,4,29).to_era     # => "H24.4.29"
 	Date.new(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
 	Date.new(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
