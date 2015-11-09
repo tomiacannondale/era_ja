@@ -18,7 +18,9 @@
 
 ### ruby version ###
 
-era_jaはruby1.9.3とruby2.0.0でテストをしています。
+era_jaはruby2.0.0とruby2.1.x, 2.2.xでテストをしています。(xは現時点での最後のバージョンです)
+
+**NOTE** :: era_ja0.4.0からruby1.9.3をサポートしていません。
 
 ## Usage
 
@@ -56,6 +58,18 @@ EraJa#to_eraメソッドでの追加のフォーマット文字列は以下の�
 ```ruby
 	Time.mktime(2012,4,29).to_era("%Jy年%Jm月%Jd日") # => "二千十二年四月二十九日"
 	Date.new(2012,4,29).to_era("%Jy年%Jm月%Jd日")    # => "二千十二年四月二十九日"
+```
+
+### Era names ###
+
+もしデフォルトの元号文字列以外の文字列でコンバートしたい場合、 `era_names` を使用することができます。
+
+```ruby
+require 'era_ja'
+Time.mktime(2012,4,29).to_era(era_names: { heisei: ['h', '平'] })                       # => "h24.4.29"
+Time.mktime(2012,4,29).to_era("%O%E年%m月%d日", era_names: { heisei: ['h', '平'] })     # => "平24年4月29日"
+Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日", era_names: { heisei: ['h', '平'] })  # => "平二十四年四月二十九日"
+# same as Date
 ```
 
 ## Support

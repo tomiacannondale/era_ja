@@ -18,7 +18,9 @@ Or install it yourself as:
 
 ### ruby version ###
 
-era_ja was run test on ruby 1.9.3 and ruby 2.0.0
+era_ja was run test on ruby 2.0.0 and ruby 2.1.x and ruby 2.2.x .(x is latest version)
+
+**NOTE** :: era_ja does not support ruby 1.9.3 since 0.4.0
 
 ## Usage
 
@@ -56,6 +58,17 @@ EraJa#to_era of extra format string is follow.
 ```ruby
 	Time.mktime(2012,4,29).to_era("%Jy年%Jm月%Jd日") # => "二千十二年四月二十九日"
 	Date.new(2012,4,29).to_era("%Jy年%Jm月%Jd日")    # => "二千十二年四月二十九日"
+
+### Era names ###
+
+If you want to convert custom ara string, you can set `era_names` .
+
+```ruby
+require 'era_ja'
+Time.mktime(2012,4,29).to_era(era_names: { heisei: ['h', '平'] })                       # => "h24.4.29"
+Time.mktime(2012,4,29).to_era("%O%E年%m月%d日", era_names: { heisei: ['h', '平'] })     # => "平24年4月29日"
+Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日", era_names: { heisei: ['h', '平'] })  # => "平二十四年四月二十九日"
+# same as Date
 ```
 
 ## Support
