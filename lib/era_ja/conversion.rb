@@ -18,6 +18,11 @@ module EraJa
     #   * %O - era(kanzi)
     #   * %E - era year
     #   * %J - kanzi number
+    # @param [Hash] era_names
+    #    If you want to convert custom era string(ex `平`, `h`), you can set this argument.
+    #    key is `:meiji' or `:taisho' or `:showa` or `:heisei`.
+    #    value is ["alphabet era name"(ex `h`, `s`)(related to `%o`), "multibyte ara name"(ex `平`, `昭`)(related to `%O`)].
+    #    this argument is same as one element of ERA_NAME_DEFAULTS.
     # @return [String]
     def to_era(format = "%o%E.%m.%d", era_names: ERA_NAME_DEFAULTS)
       @era_format = format.dup
