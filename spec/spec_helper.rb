@@ -9,6 +9,25 @@ RSpec.shared_examples "should equal 'H24.04.29'" do
   end
 end
 
+RSpec.shared_examples "should equal 'h24.04.29'" do
+  context "with era_names option" do
+    context "when era_names is correct" do
+      let(:era_names) { { heisei: ["h", "平成"] } }
+      it { expect(subject.to_era(era_names: era_names)).to eq "h24.04.29" }
+    end
+
+    context "when era_names have no heisei values" do
+      let(:era_names) { { showa: ["s", "昭和"] } }
+      it { expect { subject.to_era(era_names: era_names) }.to raise_error }
+    end
+  end
+
+  context "with '%o%E.%m.%d' and era_names option" do
+    let(:era_names) { { heisei: ["h", "平成"] } }
+    it { expect(subject.to_era("%o%E.%m.%d", era_names: era_names)).to eq "h24.04.29" }
+  end
+end
+
 RSpec.shared_examples "should equal '平成24年04月29日'" do
   context "with '%O%E年%m月%d日'" do
     it { expect(subject.to_era("%O%E年%m月%d日")).to eq "平成24年04月29日" }
@@ -30,6 +49,22 @@ end
 RSpec.shared_examples "should equal '平成240429'" do
   context "with '%O%E%m%d'" do
     it { expect(subject.to_era("%O%E%m%d")).to eq '平成240429' }
+  end
+end
+
+RSpec.shared_examples "should equal '平240429'" do
+  context "with '%O%E%m%d' and era_names option" do
+    let(:format) { "%O%E%m%d" }
+
+    context "when era_names is correct" do
+      let(:era_names) { { heisei: ["H", "平"] } }
+      it { expect(subject.to_era(format, era_names: era_names)).to eq '平240429' }
+    end
+
+    context "when era_names have no heisei values" do
+      let(:era_names) { { showa: ["S", "昭"] } }
+      it { expect { subject.to_era(format, era_names: era_names) }.to raise_error }
+    end
   end
 end
 
@@ -103,10 +138,12 @@ end
 
 RSpec.shared_examples "2012,4,29" do
   include_examples "should equal 'H24.04.29'"
+  include_examples "should equal 'h24.04.29'"
   include_examples "should equal '平成24年04月29日'"
   include_examples "should equal '24.04.29'"
   include_examples "should equal '2404'"
   include_examples "should equal '平成240429'"
+  include_examples "should equal '平240429'"
   include_examples "should equal '2012年04月29日'"
   include_examples "should equal '平成二十四年四月二十九日'"
   include_examples "should equal '二千十二年四月二十九日'"

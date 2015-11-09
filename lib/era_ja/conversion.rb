@@ -3,7 +3,12 @@ require 'date'
 
 module EraJa
   module Conversion
-    ERA = [["M", "明治"], ["T", "大正"], ["S", "昭和"], ["H", "平成"]]
+    ERA_NAME_DEFAULTS = {
+      meiji:  ["M", "明治"],
+      taisho: ["T", "大正"],
+      showa:  ["S", "昭和"],
+      heisei: ["H", "平成"]
+    }
 
     # Convert to Japanese era.
     # @param [String] format_string
@@ -14,7 +19,7 @@ module EraJa
     #   * %E - era year
     #   * %J - kanzi number
     # @return [String]
-    def to_era(format = "%o%E.%m.%d")
+    def to_era(format = "%o%E.%m.%d", era_names: ERA_NAME_DEFAULTS)
       @era_format = format.dup
       @era_format.gsub!(/%J/, "%J%")
       @era_format.sub!(/%o/i) { |m| m + ' ' }
@@ -24,28 +29,28 @@ module EraJa
         if self.to_time < ::Time.mktime(1868,9,8)
           raise "#to_era is expeted later in 1868,9,8"
         elsif self.to_time < ::Time.mktime(1912,7,30)
-          str_time = era_year(year - 1867, 'M')
+          str_time = era_year(year - 1867, :meiji, era_names)
         elsif self.to_time < ::Time.mktime(1926,12,25)
-          str_time = era_year(year - 1911, 'T')
+          str_time = era_year(year - 1911, :taisho, era_names)
         elsif self.to_time < ::Time.mktime(1989,1,8)
-          str_time = era_year(year - 1925, 'S')
+          str_time = era_year(year - 1925, :showa, era_names)
         else
-          str_time = era_year(year - 1988, 'H')
+          str_time = era_year(year - 1988, :heisei, era_names)
         end
       end
       str_time.gsub(/%J(\d+)/) { to_kanzi($1) }
     end
 
     private
-    def era_year(year, era)
-      strftime(@era_format).sub(/(%J)?%E /) { format_year(year, $1) }.sub(/%o /i) { format_era(era) }
+    def era_year(year, era, era_names)
+      strftime(@era_format).sub(/(%J)?%E /) { format_year(year, $1) }.sub(/%o /i) { format_era(era, era_names) }
     end
 
-    def format_era(string)
+    def format_era(era, era_names)
       if @era_format =~ /%o/
-        return "#{ERA.detect{ |i| i[0] == string}[0]}"
+        return era_names.fetch(era)[0]
       elsif @era_format =~ /%O/
-        return "#{ERA.detect{ |i| i[0] == string}[1]}"
+        return era_names.fetch(era)[1]
       end
     end
 
