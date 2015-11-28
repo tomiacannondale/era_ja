@@ -25,10 +25,7 @@ module EraJa
     #    this argument is same as one element of ERA_NAME_DEFAULTS.
     # @return [String]
     def to_era(format = "%o%E.%m.%d", era_names: ERA_NAME_DEFAULTS)
-      @era_format = format.dup
-      @era_format.gsub!(/%J/, "%J%")
-      @era_format.sub!(/%o/i) { |m| m + ' ' }
-      @era_format.sub!(/%E/) { |m| m + ' ' }
+      @era_format = format.gsub(/%J/, "%J%")
       str_time = strftime(@era_format)
       if @era_format =~ /%E/
         if self.to_time < ::Time.mktime(1868,9,8)
@@ -48,7 +45,7 @@ module EraJa
 
     private
     def era_year(year, era, era_names)
-      strftime(@era_format).sub(/(%J)?%E /) { format_year(year, $1) }.sub(/%o /i) { format_era(era, era_names) }
+      strftime(@era_format).sub(/(%J)?%E/) { format_year(year, $1) }.sub(/%o/i) { format_era(era, era_names) }
     end
 
     def format_era(era, era_names)
