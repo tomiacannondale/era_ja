@@ -1,4 +1,4 @@
-# EraJa
+# EraJa [![Build Status](https://travis-ci.org/tomiacannondale/era_ja.svg)](https://travis-ci.org/tomiacannondale/era_ja)
 
 日本の和暦に変換します。
 
