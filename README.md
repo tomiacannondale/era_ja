@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ### ruby version ###
 
-era_ja was run test on ruby 2.0.0 and ruby 2.1.x and ruby 2.2.x .(x is latest version)
+See [.travis.yml](https://github.com/tomiacannondale/era_ja/blob/master/.travis.yml )
 
 **NOTE** :: era_ja does not support ruby 1.9.3 since 0.4.0
 

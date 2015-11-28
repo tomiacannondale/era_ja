@@ -18,7 +18,7 @@
 
 ### ruby version ###
 
-era_jaはruby2.0.0とruby2.1.x, 2.2.xでテストをしています。(xは現時点での最後のバージョンです)
+[.travis.yml](https://github.com/tomiacannondale/era_ja/blob/master/.travis.yml ) を確認してください。
 
 **NOTE** :: era_ja0.4.0からruby1.9.3をサポートしていません。
 
