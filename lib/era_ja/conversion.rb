@@ -30,13 +30,14 @@ module EraJa
       @era_format = format.gsub(/%J/, "%J%")
       str_time = strftime(@era_format)
       if @era_format =~ /%E/
-        if self.to_time < ::Time.mktime(1868,9,8)
+        case
+        when self.to_time < ::Time.mktime(1868,9,8)
           raise ERR_DATE_OUT_OF_RANGE
-        elsif self.to_time < ::Time.mktime(1912,7,30)
+        when self.to_time < ::Time.mktime(1912,7,30)
           str_time = era_year(year - 1867, :meiji, era_names)
-        elsif self.to_time < ::Time.mktime(1926,12,25)
+        when self.to_time < ::Time.mktime(1926,12,25)
           str_time = era_year(year - 1911, :taisho, era_names)
-        elsif self.to_time < ::Time.mktime(1989,1,8)
+        when self.to_time < ::Time.mktime(1989,1,8)
           str_time = era_year(year - 1925, :showa, era_names)
         else
           str_time = era_year(year - 1988, :heisei, era_names)
@@ -51,11 +52,12 @@ module EraJa
     end
 
     def format_era(era, era_names)
-      if @era_format =~ /%o/
+      case
+      when @era_format =~ /%o/
         era_names.fetch(era)[0]
-      elsif @era_format =~ /%1O/
+      when @era_format =~ /%1O/
         era_names.fetch(era)[1][0]
-      elsif @era_format =~ /%O/
+      when @era_format =~ /%O/
         era_names.fetch(era)[1]
       end
     end
