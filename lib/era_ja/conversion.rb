@@ -10,6 +10,8 @@ module EraJa
       heisei: ["H", "平成"]
     }
 
+    ERR_DATE_OUT_OF_RANGE = "#to_era only works on dates after 1868,9,8"
+
     # Convert to Japanese era.
     # @param [String] format_string
     #   Time#strftime format string can be used
@@ -19,22 +21,23 @@ module EraJa
     #   * %E - era year
     #   * %J - kanzi number
     # @param [Hash] era_names
-    #    If you want to convert custom era string(ex `平`, `h`), you can set this argument.
+    #    If you want to convert custom to era strings (eg `平`, `h`), you can set this argument.
     #    key is `:meiji' or `:taisho' or `:showa` or `:heisei`.
-    #    value is ["alphabet era name"(ex `h`, `s`)(related to `%o`), "multibyte ara name"(ex `平`, `昭`)(related to `%O`)].
+    #    value is ["alphabet era name"(ex `h`, `s`)(related to `%o`), "multibyte era name"(eg `平`, `昭`)(related to `%O`)].
     #    this argument is same as one element of ERA_NAME_DEFAULTS.
     # @return [String]
     def to_era(format = "%o%E.%m.%d", era_names: ERA_NAME_DEFAULTS)
       @era_format = format.gsub(/%J/, "%J%")
       str_time = strftime(@era_format)
       if @era_format =~ /%E/
-        if self.to_time < ::Time.mktime(1868,9,8)
-          raise "#to_era is expeted later in 1868,9,8"
-        elsif self.to_time < ::Time.mktime(1912,7,30)
+        case
+        when self.to_time < ::Time.mktime(1868,9,8)
+          raise ERR_DATE_OUT_OF_RANGE
+        when self.to_time < ::Time.mktime(1912,7,30)
           str_time = era_year(year - 1867, :meiji, era_names)
-        elsif self.to_time < ::Time.mktime(1926,12,25)
+        when self.to_time < ::Time.mktime(1926,12,25)
           str_time = era_year(year - 1911, :taisho, era_names)
-        elsif self.to_time < ::Time.mktime(1989,1,8)
+        when self.to_time < ::Time.mktime(1989,1,8)
           str_time = era_year(year - 1925, :showa, era_names)
         else
           str_time = era_year(year - 1988, :heisei, era_names)
@@ -45,14 +48,17 @@ module EraJa
 
     private
     def era_year(year, era, era_names)
-      strftime(@era_format).sub(/(%J)?%E/) { format_year(year, $1) }.sub(/%o/i) { format_era(era, era_names) }
+      strftime(@era_format).sub(/(%J)?%E/) { format_year(year, $1) }.sub(/%1?o/i) { format_era(era, era_names) }
     end
 
     def format_era(era, era_names)
-      if @era_format =~ /%o/
-        return era_names.fetch(era)[0]
-      elsif @era_format =~ /%O/
-        return era_names.fetch(era)[1]
+      case
+      when @era_format =~ /%o/
+        era_names.fetch(era)[0]
+      when @era_format =~ /%1O/
+        era_names.fetch(era)[1][0]
+      when @era_format =~ /%O/
+        era_names.fetch(era)[1]
       end
     end
 

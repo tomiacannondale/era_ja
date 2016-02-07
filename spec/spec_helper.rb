@@ -18,7 +18,7 @@ RSpec.shared_examples "should equal 'h24.04.29'" do
 
     context "when era_names have no heisei values" do
       let(:era_names) { { showa: ["s", "昭和"] } }
-      it { expect { subject.to_era(era_names: era_names) }.to raise_error }
+      it { expect { subject.to_era(era_names: era_names) }.to raise_error(KeyError) }
     end
   end
 
@@ -31,6 +31,12 @@ end
 RSpec.shared_examples "should equal '平成24年04月29日'" do
   context "with '%O%E年%m月%d日'" do
     it { expect(subject.to_era("%O%E年%m月%d日")).to eq "平成24年04月29日" }
+  end
+end
+
+RSpec.shared_examples "should equal '平24年04月29日'" do
+  context "with '%1O%E年%m月%d日'" do
+    it { expect(subject.to_era("%1O%E年%m月%d日")).to eq "平24年04月29日" }
   end
 end
 
@@ -63,7 +69,7 @@ RSpec.shared_examples "should equal '平240429'" do
 
     context "when era_names have no heisei values" do
       let(:era_names) { { showa: ["S", "昭"] } }
-      it { expect { subject.to_era(format, era_names: era_names) }.to raise_error }
+      it { expect { subject.to_era(format, era_names: era_names) }.to raise_error(KeyError) }
     end
   end
 end
@@ -104,6 +110,10 @@ RSpec.shared_examples "should equal '昭和64.01.07'" do
   it { expect(subject.to_era("%O%E.%m.%d")).to eq "昭和64.01.07" }
 end
 
+RSpec.shared_examples "should equal '昭64.01.07'" do
+  it { expect(subject.to_era("%1O%E.%m.%d")).to eq "昭64.01.07" }
+end
+
 RSpec.shared_examples "should equal 'S01.12.25'" do
   it { expect(subject.to_era).to eq "S01.12.25" }
 end
@@ -120,6 +130,10 @@ RSpec.shared_examples "should equal '大正01.07.30'" do
   it { expect(subject.to_era("%O%E.%m.%d")).to eq "大正01.07.30" }
 end
 
+RSpec.shared_examples "should equal '大01.07.30'" do
+  it { expect(subject.to_era("%1O%E.%m.%d")).to eq "大01.07.30" }
+end
+
 RSpec.shared_examples "should equal 'M45.07.29'" do
   it { expect(subject.to_era).to eq "M45.07.29" }
 end
@@ -128,18 +142,23 @@ RSpec.shared_examples "should equal '明治45.07.29'" do
   it { expect(subject.to_era("%O%E.%m.%d")).to eq "明治45.07.29" }
 end
 
+RSpec.shared_examples "should equal '明45.07.29'" do
+  it { expect(subject.to_era("%1O%E.%m.%d")).to eq "明45.07.29" }
+end
+
 RSpec.shared_examples "should equal 'M01.09.08'" do
   it { expect(subject.to_era).to eq "M01.09.08" }
 end
 
 RSpec.shared_examples "should raise error" do
-  it { expect {subject.to_era}.to raise_error(RuntimeError, "#to_era is expeted later in 1868,9,8") }
+  it { expect {subject.to_era}.to raise_error(RuntimeError, EraJa::Conversion::ERR_DATE_OUT_OF_RANGE) }
 end
 
 RSpec.shared_examples "2012,4,29" do
   include_examples "should equal 'H24.04.29'"
   include_examples "should equal 'h24.04.29'"
   include_examples "should equal '平成24年04月29日'"
+  include_examples "should equal '平24年04月29日'"
   include_examples "should equal '24.04.29'"
   include_examples "should equal '2404'"
   include_examples "should equal '平成240429'"
@@ -156,6 +175,7 @@ end
 RSpec.shared_examples "1989,1,7" do
   include_examples "should equal 'S64.01.07'"
   include_examples "should equal '昭和64.01.07'"
+  include_examples "should equal '昭64.01.07'"
 end
 
 RSpec.shared_examples "1926,12,25" do
@@ -169,11 +189,13 @@ end
 RSpec.shared_examples "1912,7,30" do
   include_examples "should equal 'T01.07.30'"
   include_examples "should equal '大正01.07.30'"
+  include_examples "should equal '大01.07.30'"
 end
 
 RSpec.shared_examples "1912,7,29" do
   include_examples "should equal 'M45.07.29'"
   include_examples "should equal '明治45.07.29'"
+  include_examples "should equal '明45.07.29'"
 end
 
 RSpec.shared_examples "1868,9,8" do
