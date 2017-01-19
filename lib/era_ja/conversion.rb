@@ -29,7 +29,7 @@ module EraJa
     def to_era(format = "%o%E.%m.%d", era_names: ERA_NAME_DEFAULTS)
       @era_format = format.gsub(/%J/, "%J%")
       str_time = strftime(@era_format)
-      if @era_format =~ /%E/
+      if @era_format =~ /%([EOo]|1O)/
         case
         when self.to_time < ::Time.mktime(1868,9,8)
           raise ERR_DATE_OUT_OF_RANGE
