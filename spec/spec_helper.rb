@@ -92,6 +92,24 @@ RSpec.shared_examples "should equal '二千十二年四月二十九日'" do
   end
 end
 
+RSpec.shared_examples "should equal '平成'" do
+  context "with '%O'" do
+    it { expect(subject.to_era('%O')).to eq '平成' }
+  end
+end
+
+RSpec.shared_examples "should equal '平'" do
+  context "with '%1O'" do
+    it { expect(subject.to_era('%1O')).to eq '平' }
+  end
+end
+
+RSpec.shared_examples "should equal 'H'" do
+  context "with '%o'" do
+    it { expect(subject.to_era('%o')).to eq 'H' }
+  end
+end
+
 RSpec.shared_examples "should equal 'H01.01.08'" do
   context "without argument" do
     it { expect(subject.to_era).to eq "H01.01.08" }
@@ -166,6 +184,9 @@ RSpec.shared_examples "2012,4,29" do
   include_examples "should equal '2012年04月29日'"
   include_examples "should equal '平成二十四年四月二十九日'"
   include_examples "should equal '二千十二年四月二十九日'"
+  include_examples "should equal '平成'"
+  include_examples "should equal '平'"
+  include_examples "should equal 'H'"
 end
 
 RSpec.shared_examples "1989,1,8" do
