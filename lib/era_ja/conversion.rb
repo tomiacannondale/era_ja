@@ -8,9 +8,9 @@ module EraJa
       taisho: ["T", "大正"],
       showa:  ["S", "昭和"],
       heisei: ["H", "平成"]
-    }
+    }.freeze
 
-    ERR_DATE_OUT_OF_RANGE = "#to_era only works on dates after 1868,9,8"
+    ERR_DATE_OUT_OF_RANGE = "#to_era only works on dates after 1868,9,8".freeze
 
     # Convert to Japanese era.
     # @param [String] format_string
