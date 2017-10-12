@@ -57,8 +57,8 @@ Date.new(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四�
 ### Convert numerals to kanzi ###
 
 ```ruby
-Time.mktime(2012,4,29).to_era("%Jy年%Jm月%Jd日") # => "二千十二年四月二十九日"
-Date.new(2012,4,29).to_era("%Jy年%Jm月%Jd日")    # => "二千十二年四月二十九日"
+Time.mktime(2012,4,29).to_era("%JY年%Jm月%Jd日") # => "二千十二年四月二十九日"
+Date.new(2012,4,29).to_era("%JY年%Jm月%Jd日")    # => "二千十二年四月二十九日"
 ```
 
 ### Era names ###
