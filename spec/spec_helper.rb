@@ -87,7 +87,7 @@ RSpec.shared_examples "should equal '2012年04月29日'" do
 end
 
 RSpec.shared_examples "should equal '二千十二年四月二十九日'" do
-  context "with '%Jy年%Jm月%Jd日'" do
+  context "with '%JY年%Jm月%Jd日'" do
     it { expect(subject.to_era('%JY年%Jm月%Jd日')).to eq '二千十二年四月二十九日' }
   end
 end
