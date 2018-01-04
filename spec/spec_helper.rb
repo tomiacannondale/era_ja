@@ -74,6 +74,18 @@ RSpec.shared_examples "should equal '平240429'" do
   end
 end
 
+RSpec.shared_examples "should equal '平成31.04.30'" do
+  it { expect(subject.to_era("%O%E.%m.%d")).to eq "平成31.04.30" }
+end
+
+RSpec.shared_examples "should equal '平31.04.30'" do
+  it { expect(subject.to_era("%1O%E.%m.%d")).to eq "平31.04.30" }
+end
+
+RSpec.shared_examples "should equal 'H31.04.30'" do
+  it { expect(subject.to_era).to eq "H31.04.30" }
+end
+
 RSpec.shared_examples "should equal '平成二十四年四月二十九日'" do
   context "with '%O%JE年%Jm月%Jd日'" do
     it { expect(subject.to_era('%O%JE年%Jm月%Jd日')).to eq '平成二十四年四月二十九日' }
@@ -170,6 +182,20 @@ end
 
 RSpec.shared_examples "should raise error" do
   it { expect {subject.to_era}.to raise_error(RuntimeError, EraJa::Conversion::ERR_DATE_OUT_OF_RANGE) }
+end
+
+RSpec.shared_examples "2019,5,1" do
+  include_examples "should raise error"
+end
+
+# RSpec.shared_examples "2019,4,30" do
+#   include_examples "should equal 'H31.04.30'"
+# end
+
+RSpec.shared_examples "2019,4,30" do
+  include_examples "should equal 'H31.04.30'"
+  include_examples "should equal '平成31.04.30'"
+  include_examples "should equal '平31.04.30'"
 end
 
 RSpec.shared_examples "2012,4,29" do

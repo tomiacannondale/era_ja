@@ -10,7 +10,7 @@ module EraJa
       heisei: ["H", "平成"]
     }.freeze
 
-    ERR_DATE_OUT_OF_RANGE = "#to_era only works on dates after 1868,9,8".freeze
+    ERR_DATE_OUT_OF_RANGE = "#to_era only works on dates from 1868,9,8 to 2019,4,30".freeze
 
     # Convert to Japanese era.
     # @param [String] format_string
@@ -39,8 +39,10 @@ module EraJa
           str_time = era_year(year - 1911, :taisho, era_names)
         when self.to_time < ::Time.mktime(1989,1,8)
           str_time = era_year(year - 1925, :showa, era_names)
-        else
+        when self.to_time < ::Time.mktime(2019,5,1)
           str_time = era_year(year - 1988, :heisei, era_names)
+        else
+          raise ERR_DATE_OUT_OF_RANGE
         end
       end
       str_time.gsub(/%J(\d+)/) { to_kanzi($1) }
