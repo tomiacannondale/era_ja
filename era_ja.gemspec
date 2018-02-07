@@ -21,5 +21,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "guard-rspec", '~> 4.5.0'
   gem.add_development_dependency 'rb-fsevent', '~> 0.9.4'
   gem.add_development_dependency 'terminal-notifier-guard', '~> 1.6.4'
-  gem.add_development_dependency 'yard', '~> 0.8.7'
+  gem.add_development_dependency 'yard', '~> 0.9.12'
 end
