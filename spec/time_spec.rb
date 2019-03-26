@@ -5,6 +5,11 @@ require File.expand_path('spec_helper', File.dirname(__FILE__))
 RSpec.describe Time do
   describe "#to_era" do
 
+    context 'time is 2019,4,30' do
+      subject { Date.new(2019,4,30) }
+      include_examples "2019,4,30"
+    end
+
     context "time is 2012,4,29" do
       subject { Time.mktime(2012,4,29) }
       include_examples "2012,4,29"

@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 require 'rspec'
 
+RSpec.shared_examples "should equal '平成三十一年四月三十日'" do
+  context "with '%O%JE年%Jm月%Jd日'" do
+    it { expect(subject.to_era("%O%JE年%Jm月%Jd日")).to eq "平成三十一年四月三十日" }
+  end
+end
+
+RSpec.shared_examples "should equal '二千十九年四月三十日'" do
+  context "with '%JY年%Jm月%Jd日'" do
+    it { expect(subject.to_era("%JY年%Jm月%Jd日")).to eq "二千十九年四月三十日" }
+  end
+end
+
 RSpec.shared_examples "should equal 'H24.04.29'" do
   it { expect(subject.to_era).to eq "H24.04.29" }
 
@@ -170,6 +182,11 @@ end
 
 RSpec.shared_examples "should raise error" do
   it { expect {subject.to_era}.to raise_error(RuntimeError, EraJa::Conversion::ERR_DATE_OUT_OF_RANGE) }
+end
+
+RSpec.shared_examples "2019,4,30" do
+  include_examples "should equal '平成三十一年四月三十日'"
+  include_examples "should equal '二千十九年四月三十日'"
 end
 
 RSpec.shared_examples "2012,4,29" do
