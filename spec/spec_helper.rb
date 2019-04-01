@@ -1,6 +1,34 @@
 # -*- coding: utf-8 -*-
 require 'rspec'
 
+RSpec.shared_examples "should equal 'R01.07.02'" do
+  it { expect(subject.to_era).to eq "R01.07.02" }
+
+  context "with '%o%E.%m.%d'" do
+    it { expect(subject.to_era("%o%E.%m.%d")).to eq "R01.07.02" }
+  end
+end
+
+RSpec.shared_examples "should equal '令和01年07月02日'" do
+  context "with '%O%E年%m月%d日'" do
+    it { expect(subject.to_era("%O%E年%m月%d日")).to eq "令和01年07月02日" }
+  end
+end
+
+RSpec.shared_examples "should equal 'R01.05.01'" do
+  it { expect(subject.to_era).to eq "R01.05.01" }
+
+  context "with '%o%E.%m.%d'" do
+    it { expect(subject.to_era("%o%E.%m.%d")).to eq "R01.05.01" }
+  end
+end
+
+RSpec.shared_examples "should equal '令和01年05月01日'" do
+  context "with '%O%E年%m月%d日'" do
+    it { expect(subject.to_era("%O%E年%m月%d日")).to eq "令和01年05月01日" }
+  end
+end
+
 RSpec.shared_examples "should equal '平成三十一年四月三十日'" do
   context "with '%O%JE年%Jm月%Jd日'" do
     it { expect(subject.to_era("%O%JE年%Jm月%Jd日")).to eq "平成三十一年四月三十日" }
@@ -182,6 +210,16 @@ end
 
 RSpec.shared_examples "should raise error" do
   it { expect {subject.to_era}.to raise_error(RuntimeError, EraJa::Conversion::ERR_DATE_OUT_OF_RANGE) }
+end
+
+RSpec.shared_examples "2019,7,2" do
+  include_examples "should equal 'R01.07.02'"
+  include_examples "should equal '令和01年07月02日'"
+end
+
+RSpec.shared_examples "2019,5,1" do
+  include_examples "should equal 'R01.05.01'"
+  include_examples "should equal '令和01年05月01日'"
 end
 
 RSpec.shared_examples "2019,4,30" do
