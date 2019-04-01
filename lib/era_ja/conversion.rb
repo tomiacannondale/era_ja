@@ -43,7 +43,7 @@ module EraJa
         when self.to_time < ::Time.mktime(2019, 5, 1)
           str_time = era_year(year - 1988, :heisei, era_names)
         else
-          str_time = era_year(year - 2019, :reiwa, era_names)
+          str_time = era_year(year - 2018, :reiwa, era_names)
         end
       end
       str_time.gsub(/%J(\d+)/) { to_kanzi($1) }
