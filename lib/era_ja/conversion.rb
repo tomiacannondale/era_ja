@@ -7,7 +7,8 @@ module EraJa
       meiji:  ["M", "明治"],
       taisho: ["T", "大正"],
       showa:  ["S", "昭和"],
-      heisei: ["H", "平成"]
+      heisei: ["H", "平成"],
+      reiwa: ["R", "令和"]
     }.freeze
 
     ERR_DATE_OUT_OF_RANGE = "#to_era only works on dates after 1868,9,8".freeze
@@ -22,7 +23,7 @@ module EraJa
     #   * %J - kanzi number
     # @param [Hash] era_names
     #    If you want to convert custom to era strings (eg `平`, `h`), you can set this argument.
-    #    key is `:meiji' or `:taisho' or `:showa` or `:heisei`.
+    #    key is `:meiji' or `:taisho' or `:showa` or `:heisei` or `:reiwa`.
     #    value is ["alphabet era name"(ex `h`, `s`)(related to `%o`), "multibyte era name"(eg `平`, `昭`)(related to `%O`)].
     #    this argument is same as one element of ERA_NAME_DEFAULTS.
     # @return [String]
@@ -39,8 +40,10 @@ module EraJa
           str_time = era_year(year - 1911, :taisho, era_names)
         when self.to_time < ::Time.mktime(1989,1,8)
           str_time = era_year(year - 1925, :showa, era_names)
-        else
+        when self.to_time < ::Time.mktime(2019, 5, 1)
           str_time = era_year(year - 1988, :heisei, era_names)
+        else
+          str_time = era_year(year - 2019, :reiwa, era_names)
         end
       end
       str_time.gsub(/%J(\d+)/) { to_kanzi($1) }
