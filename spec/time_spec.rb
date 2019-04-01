@@ -16,7 +16,7 @@ RSpec.describe Time do
     end
 
     context 'time is 2019,4,30' do
-      subject { Date.new(2019,4,30) }
+      subject { Time.mktime(2019,4,30) }
       include_examples "2019,4,30"
     end
 
