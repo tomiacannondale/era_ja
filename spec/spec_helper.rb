@@ -23,9 +23,111 @@ RSpec.shared_examples "should equal 'R01.05.01'" do
   end
 end
 
+RSpec.shared_examples "should equal 'r01.05.01'" do
+  context "with era_names option" do
+    context "when era_names is correct" do
+      let(:era_names) { { reiwa: ["r", "令和"] } }
+      it { expect(subject.to_era(era_names: era_names)).to eq "r01.05.01" }
+    end
+
+    context "when era_names have no reiwa values" do
+      let(:era_names) { { heisei: ["h", "平成"] } }
+      it { expect { subject.to_era(era_names: era_names) }.to raise_error(KeyError) }
+    end
+  end
+
+  context "with '%o%E.%m.%d' and era_names option" do
+    let(:era_names) { { reiwa: ["r", "令和"] } }
+    it { expect(subject.to_era("%o%E.%m.%d", era_names: era_names)).to eq "r01.05.01" }
+  end
+end
+
 RSpec.shared_examples "should equal '令和01年05月01日'" do
   context "with '%O%E年%m月%d日'" do
     it { expect(subject.to_era("%O%E年%m月%d日")).to eq "令和01年05月01日" }
+  end
+end
+
+RSpec.shared_examples "should equal '令01年05月01日'" do
+  context "with '%1O%E年%m月%d日'" do
+    it { expect(subject.to_era("%1O%E年%m月%d日")).to eq "令01年05月01日" }
+  end
+end
+
+RSpec.shared_examples "should equal '01.05.01'" do
+  context "with '%E.%m.%d'" do
+    it { expect(subject.to_era("%E.%m.%d")).to eq "01.05.01" }
+  end
+end
+
+RSpec.shared_examples "should equal '0105'" do
+  context "with '%E%m'" do
+    it { expect(subject.to_era("%E%m")).to eq "0105" }
+  end
+end
+
+RSpec.shared_examples "should equal '令和010501'" do
+  context "with '%O%E%m%d'" do
+    it { expect(subject.to_era("%O%E%m%d")).to eq "令和010501" }
+  end
+end
+
+RSpec.shared_examples "should equal '令010501'" do
+  context "with '%O%E%m%d' and era_names option" do
+    let(:format) { "%O%E%m%d" }
+
+    context "when era_names is correct" do
+      let(:era_names) { { reiwa: ["R", "令"] } }
+      it { expect(subject.to_era(format, era_names: era_names)).to eq '令010501' }
+    end
+
+    context "when era_names have no heisei values" do
+      let(:era_names) { { heisei: ["H", "平"] } }
+      it { expect { subject.to_era(format, era_names: era_names) }.to raise_error(KeyError) }
+    end
+  end
+end
+
+RSpec.shared_examples "should equal '2019年05月01日'" do
+  context "with '%y年%m月%d日'" do
+    it { expect(subject.to_era('%Y年%m月%d日')).to eq '2019年05月01日' }
+  end
+end
+
+RSpec.shared_examples "should equal '令和元年五月一日'" do
+  context "with '%O%JE年%Jm月%Jd日'" do
+    it { expect(subject.to_era('%O%JE年%Jm月%Jd日')).to eq '令和元年五月一日' }
+  end
+end
+
+RSpec.shared_examples "should equal '二千十九年五月一日'" do
+  context "with '%JY年%Jm月%Jd日'" do
+    it { expect(subject.to_era('%JY年%Jm月%Jd日')).to eq '二千十九年五月一日' }
+  end
+end
+
+
+RSpec.shared_examples "should equal '令和'" do
+  context "with '%O'" do
+    it { expect(subject.to_era('%O')).to eq '令和' }
+  end
+end
+
+RSpec.shared_examples "should equal '令'" do
+  context "with '%1O'" do
+    it { expect(subject.to_era('%1O')).to eq '令' }
+  end
+end
+
+RSpec.shared_examples "should equal 'R'" do
+  context "with '%o'" do
+    it { expect(subject.to_era('%o')).to eq 'R' }
+  end
+end
+
+RSpec.shared_examples "should equal '令和二年一月一日'" do
+  context "with '%O%JE年%Jm月%Jd日'" do
+    it { expect(subject.to_era('%O%JE年%Jm月%Jd日')).to eq '令和二年一月一日' }
   end
 end
 
@@ -212,6 +314,10 @@ RSpec.shared_examples "should raise error" do
   it { expect {subject.to_era}.to raise_error(RuntimeError, EraJa::Conversion::ERR_DATE_OUT_OF_RANGE) }
 end
 
+RSpec.shared_examples "2020,1,1" do
+  include_examples "should equal '令和二年一月一日'"
+end
+
 RSpec.shared_examples "2019,7,2" do
   include_examples "should equal 'R01.07.02'"
   include_examples "should equal '令和01年07月02日'"
@@ -219,7 +325,19 @@ end
 
 RSpec.shared_examples "2019,5,1" do
   include_examples "should equal 'R01.05.01'"
+  include_examples "should equal 'r01.05.01'"
   include_examples "should equal '令和01年05月01日'"
+  include_examples "should equal '令01年05月01日'"
+  include_examples "should equal '01.05.01'"
+  include_examples "should equal '0105'"
+  include_examples "should equal '令和010501'"
+  include_examples "should equal '令010501'"
+  include_examples "should equal '2019年05月01日'"
+  include_examples "should equal '令和元年五月一日'"
+  include_examples "should equal '二千十九年五月一日'"
+  include_examples "should equal '令和'"
+  include_examples "should equal '令'"
+  include_examples "should equal 'R'"
 end
 
 RSpec.shared_examples "2019,4,30" do
