@@ -5,6 +5,11 @@ require File.expand_path('spec_helper', File.dirname(__FILE__))
 RSpec.describe Date do
   describe "#to_era" do
 
+    context "date is 2019,7,2" do
+      subject { Date.new(2019,7,2) }
+      include_examples "2019,7,2"
+    end
+
     context 'date is 2019,5,1' do
       subject { Date.new(2019,5,1) }
       include_examples "2019,5,1"
@@ -59,11 +64,6 @@ RSpec.describe Date do
     context "date is 1868,9,7" do
       subject { Date.new(1868,9,7) }
       include_examples "1868,9,7"
-    end
-
-    context "date is 2019,7,2" do
-      subject { Date.new(2019,7,2) }
-      include_examples "2019,7,2"
     end
 
   end
