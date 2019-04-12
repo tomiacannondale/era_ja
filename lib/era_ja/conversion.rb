@@ -11,8 +11,6 @@ module EraJa
       reiwa:  ["R", "令和"]
     }.freeze
 
-    ERR_DATE_OUT_OF_RANGE = "#to_era only works on dates after 1868,9,8".freeze
-
     # Convert to Japanese era.
     # @param [String] format_string
     #   Time#strftime format string can be used
@@ -33,7 +31,7 @@ module EraJa
       if @era_format =~ /%([EOo]|1O)/
         case
         when self.to_time < ::Time.mktime(1868,9,8)
-          raise ERR_DATE_OUT_OF_RANGE
+          raise EraJa::DateOutOfRangeError
         when self.to_time < ::Time.mktime(1912,7,30)
           str_time = era_year(year - 1867, :meiji, era_names)
         when self.to_time < ::Time.mktime(1926,12,25)

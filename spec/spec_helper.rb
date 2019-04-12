@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'rspec'
+require File.expand_path('../lib/era_ja/error', File.dirname(__FILE__))
 
 RSpec.shared_examples "should equal 'R01.07.02'" do
   it { expect(subject.to_era).to eq "R01.07.02" }
@@ -311,7 +312,7 @@ RSpec.shared_examples "should equal 'M01.09.08'" do
 end
 
 RSpec.shared_examples "should raise error" do
-  it { expect {subject.to_era}.to raise_error(RuntimeError, EraJa::Conversion::ERR_DATE_OUT_OF_RANGE) }
+  it { expect {subject.to_era}.to raise_error(EraJa::DateOutOfRangeError, EraJa::DateOutOfRangeError::ERR_DATE_OUT_OF_RANGE) }
 end
 
 RSpec.shared_examples "2020,1,1" do
