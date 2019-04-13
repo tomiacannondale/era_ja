@@ -32,7 +32,7 @@ module EraJa
       str_time = strftime(@era_format)
       if @era_format =~ /%([EOo]|1O)/
         case
-        when self.to_time < ::Time.mktime(1868,9,8)
+        when !era_convertible?
           raise ERR_DATE_OUT_OF_RANGE
         when self.to_time < ::Time.mktime(1912,7,30)
           str_time = era_year(year - 1867, :meiji, era_names)
@@ -47,6 +47,10 @@ module EraJa
         end
       end
       str_time.gsub(/%J(\d+)/) { to_kanzi($1) }
+    end
+
+    def era_convertible?
+      self.to_time >= ::Time.mktime(1868,9,8)
     end
 
     private

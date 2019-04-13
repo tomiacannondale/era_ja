@@ -79,6 +79,18 @@ Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日", era_names: { heisei: ['h',
 # same as Date
 ```
 
+### 元号に変換できるかどうかの判定方法 ###
+
+日付が元号に変換できるかどうかを判定するために、`era_convertible?` を使うことができます。 
+
+```ruby
+require 'era_ja'
+Time.mktime(1868,9,7).era_convertible? #=> false
+Time.mktime(1868,9,8).era_convertible? #=> true
+```
+
+元号に変換できない日付に関しては、Noteセクションを参照してください。
+
 ## Support
 
 問題を報告したり、機能追加の要望する場合はgithubのIssuesに登録してください。 https://github.com/tomiacannondale/era_ja/issues
