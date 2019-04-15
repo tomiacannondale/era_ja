@@ -82,7 +82,7 @@ Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日", era_names: { heisei: ['h',
 
 ### Checking a date is convertible ###
 
-You can use `era_convertible?` to check if a given date is convertible or not. 
+You can use `era_convertible?` to check if a given date is convertible or not.
 
 ```ruby
 require 'era_ja'

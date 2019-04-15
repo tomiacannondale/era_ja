@@ -27,7 +27,7 @@ module EraJa
     # @return [String]
     def to_era(format = "%o%E.%m.%d", era_names: ERA_NAME_DEFAULTS)
       raise EraJa::DateOutOfRangeError unless era_convertible?
-      
+
       @era_format = format.gsub(/%J/, "%J%")
       str_time = strftime(@era_format)
       if @era_format =~ /%([EOo]|1O)/
