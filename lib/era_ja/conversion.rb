@@ -26,12 +26,12 @@ module EraJa
     #    this argument is same as one element of ERA_NAME_DEFAULTS.
     # @return [String]
     def to_era(format = "%o%E.%m.%d", era_names: ERA_NAME_DEFAULTS)
+      raise EraJa::DateOutOfRangeError unless era_convertible?
+      
       @era_format = format.gsub(/%J/, "%J%")
       str_time = strftime(@era_format)
       if @era_format =~ /%([EOo]|1O)/
         case
-        when self.to_time < ::Time.mktime(1868,9,8)
-          raise EraJa::DateOutOfRangeError
         when self.to_time < ::Time.mktime(1912,7,30)
           str_time = era_year(year - 1867, :meiji, era_names)
         when self.to_time < ::Time.mktime(1926,12,25)
@@ -45,6 +45,10 @@ module EraJa
         end
       end
       str_time.gsub(/%J(\d+)/) { to_kanzi($1) }
+    end
+
+    def era_convertible?
+      self.to_time >= ::Time.mktime(1868,9,8)
     end
 
     private

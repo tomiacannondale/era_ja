@@ -73,4 +73,20 @@ RSpec.describe Date do
 
   end
 
+  describe "#era_convertible?" do
+
+    context "when date is not convertible" do
+      it "returns false" do
+        expect(Date.new(1868,9,7).era_convertible?).to be false
+      end
+    end
+
+    context "when date is convertible" do
+      it "returns true" do
+        expect(Date.new(1868,9,8).era_convertible?).to be true
+      end
+    end
+
+  end
+
 end
