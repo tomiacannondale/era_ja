@@ -89,7 +89,7 @@ Time.mktime(1868,9,7).era_convertible? #=> false
 Time.mktime(1868,9,8).era_convertible? #=> true
 ```
 
-元号に変換できない日付に関しては、Noteセクションを参照してください。
+元号に変換できない日付に関しては、[Noteセクション](#note) を参照してください。
 
 ## Support
 

@@ -90,7 +90,7 @@ Time.mktime(1868,9,7).era_convertible? #=> false
 Time.mktime(1868,9,8).era_convertible? #=> true
 ```
 
-See Note section for more details.
+See [Note](#note) section for more details.
 
 ## Support
 
