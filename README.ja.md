@@ -38,8 +38,8 @@ EraJa#to_eraメソッドでの追加のフォーマット文字列は以下の�
 
 ```ruby
 require 'era_ja'
-Time.mktime(2012,4,29).to_era   # => "H24.4.29"
-Time.mktime(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
+Time.mktime(2012,4,29).to_era   # => "H24.04.29"
+Time.mktime(2012,4,29).to_era("%O%E年%-m月%d日") # => "平成24年4月29日"
 Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
 ```
 
@@ -47,8 +47,8 @@ Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年�
 
 ```ruby
 require 'era_ja
-Date.new(2012,4,29).to_era     # => "H24.4.29"
-Date.new(2012,4,29).to_era("%O%E年%m月%d日") # => "平成24年4月29日"
+Date.new(2012,4,29).to_era     # => "H24.04.29"
+Date.new(2012,4,29).to_era("%O%E年%-m月%d日") # => "平成24年4月29日"
 Date.new(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四月二十九日"
 ```
 
@@ -73,8 +73,8 @@ Time.mktime(2012,4,29).to_era("%1O%E年%m月%d日") # => "平24年4月29日"
 
 ```ruby
 require 'era_ja'
-Time.mktime(2012,4,29).to_era(era_names: { heisei: ['h', '平'] })                       # => "h24.4.29"
-Time.mktime(2012,4,29).to_era("%O%E年%m月%d日", era_names: { heisei: ['h', '平'] })     # => "平24年4月29日"
+Time.mktime(2012,4,29).to_era(era_names: { heisei: ['h', '平'] })                       # => "h24.04.29"
+Time.mktime(2012,4,29).to_era("%O%E年%-m月%d日", era_names: { heisei: ['h', '平'] })     # => "平24年4月29日"
 Time.mktime(2012,4,29).to_era("%O%JE年%Jm月%Jd日", era_names: { heisei: ['h', '平'] })  # => "平二十四年四月二十九日"
 # same as Date
 ```
