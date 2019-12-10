@@ -53,7 +53,7 @@ module EraJa
 
     private
     def era_year(year, era, era_names)
-      strftime(@era_format).sub(/(%J)?%E/) { format_year(year, $1) }.sub(/%1?o/i) { format_era(era, era_names) }
+      strftime(@era_format).sub(/(%J)?(%-?E)/) { format_year(year, $1, $2) }.sub(/%1?o/i) { format_era(era, era_names) }
     end
 
     def format_era(era, era_names)
@@ -67,11 +67,19 @@ module EraJa
       end
     end
 
-    def format_year(year, match)
+    def format_year(year, match, digit)
       era_year = sprintf("%02d", year)
+
       if match == "%J"
-        era_year = year == 1 ? "元" : to_kanzi(era_year)
+        return year == 1 ? "元" : to_kanzi(era_year)
       end
+
+      era_year = if digit == "%-E"
+        sprintf("%01d", year)
+      else
+        sprintf("%02d", year)
+      end
+
       era_year
     end
 
