@@ -34,6 +34,7 @@ Extra format strings provided by EraJa#to_era are:
 * %O:  era(kanzi)
 * %1O: era(single kanzi)
 * %E:  era year
+* %-E: era year(single digit format from 1 to 9)
 * %J:  kanzi numeral
 
 ### Time instance to Japanese era
