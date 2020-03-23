@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = EraJa::VERSION
   gem.license       = "MIT"
 
-  gem.add_development_dependency "rake", '~> 10.1.0'
+  gem.add_development_dependency "rake", '>= 12.3.3'
   gem.add_development_dependency 'rspec', '~> 3.1.0'
   gem.add_development_dependency "guard-rspec", '~> 4.5.0'
   gem.add_development_dependency 'rb-fsevent', '~> 0.9.4'
