@@ -30,7 +30,7 @@ module EraJa
 
       @era_format = format.gsub(/%J/, "%J%")
       str_time = strftime(@era_format)
-      if @era_format =~ /%([EOo]|1O)/
+      if @era_format =~ /%(-?E|[Oo]|1O)/
         case
         when self.to_time < ::Time.mktime(1912,7,30)
           str_time = era_year(year - 1867, :meiji, era_names)
