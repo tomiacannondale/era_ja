@@ -94,6 +94,16 @@ Time.mktime(1868,9,8).era_convertible? #=> true
 
 元号に変換できない日付に関しては、[Noteセクション](#note) を参照してください。
 
+## 設定について
+
+以下の設定値については、デフォルトの動作を `config/initializers/era_ja.rb` で上書きすることができます。
+
+```ruby
+EraJa.configure do |config|
+  config.format_era_only_first_year_kanji = false
+end
+```
+
 ## Support
 
 問題を報告したり、機能追加の要望する場合はgithubのIssuesに登録してください。 https://github.com/tomiacannondale/era_ja/issues

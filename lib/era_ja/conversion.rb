@@ -71,7 +71,9 @@ module EraJa
       era_year = sprintf("%02d", year)
 
       if match == "%J"
-        return year == 1 ? "元" : to_kanzi(era_year)
+        return "元" if year == 1
+
+        return to_kanzi(era_year) unless EraJa.configuration.format_era_only_first_year_kanji
       end
 
       era_year = if digit == "%-E"

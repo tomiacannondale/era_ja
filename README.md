@@ -93,6 +93,16 @@ Time.mktime(1868,9,8).era_convertible? #=> true
 
 See [Note](#note) section for more details.
 
+## Configure
+
+Override any of these defaults in `config/initializers/era_ja.rb`:
+
+```ruby
+EraJa.configure do |config|
+  config.format_era_only_first_year_kanji = false
+end
+```
+
 ## Support
 
 Report issues and feature requests to github Issues. https://github.com/tomiacannondale/era_ja/issues

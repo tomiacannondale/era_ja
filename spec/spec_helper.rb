@@ -2,6 +2,14 @@
 require 'rspec'
 require File.expand_path('../lib/era_ja/error', File.dirname(__FILE__))
 
+RSpec.configure do |config|
+  config.before { restore_default_config }
+end
+
+def restore_default_config
+  EraJa.configuration = nil
+end
+
 RSpec.shared_examples "should equal 'R01.07.02'" do
   it { expect(subject.to_era).to eq "R01.07.02" }
 
@@ -145,6 +153,20 @@ end
 RSpec.shared_examples "should equal '令和二年一月一日'" do
   context "with '%O%JE年%Jm月%Jd日'" do
     it { expect(subject.to_era('%O%JE年%Jm月%Jd日')).to eq '令和二年一月一日' }
+
+    context "when format_era_only_first_year_kanji is set to true" do
+      it "should equal '令和2年1月1日'" do
+        EraJa.configure { |config| config.format_era_only_first_year_kanji = true }
+
+        expect(subject.to_era('%O%J-E年%-m月%-d日')).to eq '令和2年1月1日'
+      end
+
+      it "should equal '令和02年01月01日'" do
+        EraJa.configure { |config| config.format_era_only_first_year_kanji = true }
+
+        expect(subject.to_era('%O%JE年%m月%d日')).to eq '令和02年01月01日'
+      end
+    end
   end
 end
 
