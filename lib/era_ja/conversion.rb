@@ -11,6 +11,11 @@ module EraJa
       reiwa:  ["R", "令和"]
     }.freeze
 
+    FORMAT_STRING_MAP = {
+      '%J' => '%J%',
+      '%K' => '%K%'
+    }.freeze
+
     # Convert to Japanese era.
     # @param [String] format_string
     #   Time#strftime format string can be used
@@ -19,6 +24,7 @@ module EraJa
     #   * %O - era(kanzi)
     #   * %E - era year
     #   * %J - kanzi number
+    #   * %K - kanzi number(After the second year, make it a number)
     # @param [Hash] era_names
     #    If you want to convert custom to era strings (eg `平`, `h`), you can set this argument.
     #    key is `:meiji' or `:taisho' or `:showa` or `:heisei` or `:reiwa`.
@@ -28,7 +34,7 @@ module EraJa
     def to_era(format = "%o%E.%m.%d", era_names: ERA_NAME_DEFAULTS)
       raise EraJa::DateOutOfRangeError unless era_convertible?
 
-      @era_format = format.gsub(/%J/, "%J%")
+      @era_format = format.gsub(Regexp.new(FORMAT_STRING_MAP.keys.join('|')), FORMAT_STRING_MAP)
       str_time = strftime(@era_format)
       if @era_format =~ /%(-?E|[Oo]|1O)/
         case
@@ -53,7 +59,9 @@ module EraJa
 
     private
     def era_year(year, era, era_names)
-      strftime(@era_format).sub(/(%J)?(%-?E)/) { format_year(year, $1, $2) }.sub(/%1?o/i) { format_era(era, era_names) }
+      strftime(@era_format)
+        .sub(Regexp.new("(#{FORMAT_STRING_MAP.keys.join('|')})?(%-?E)")) { format_year(year, $1, $2) }
+        .sub(/%1?o/i) { format_era(era, era_names) }
     end
 
     def format_era(era, era_names)
@@ -70,8 +78,10 @@ module EraJa
     def format_year(year, match, digit)
       era_year = sprintf("%02d", year)
 
-      if match == "%J"
-        return year == 1 ? "元" : to_kanzi(era_year)
+      if %w(%J %K).include?(match)
+        return "元" if year == 1
+
+        return to_kanzi(era_year) if match == "%J"
       end
 
       era_year = if digit == "%-E"

@@ -30,6 +30,10 @@ RSpec.shared_examples "should equal '令和01年07月02日'" do
   context "with '%-E年%-m月%-d日'" do
     it { expect(subject.to_era("%-E年%-m月%-d日")).to eq "1年7月2日" }
   end
+
+  context "with '%O%K%-E年%m月%d日'" do
+    it { expect(subject.to_era("%O%K%-E年%m月%d日")).to eq "令和元年07月02日" }
+  end
 end
 
 RSpec.shared_examples "should equal 'R01.05.01'" do
@@ -62,6 +66,10 @@ end
 RSpec.shared_examples "should equal '令和01年05月01日'" do
   context "with '%O%E年%m月%d日'" do
     it { expect(subject.to_era("%O%E年%m月%d日")).to eq "令和01年05月01日" }
+  end
+
+  context "with '%O%K%E年%m月%d日'" do
+    it { expect(subject.to_era("%O%K%E年%m月%d日")).to eq "令和元年05月01日" }
   end
 end
 
@@ -145,6 +153,10 @@ end
 RSpec.shared_examples "should equal '令和二年一月一日'" do
   context "with '%O%JE年%Jm月%Jd日'" do
     it { expect(subject.to_era('%O%JE年%Jm月%Jd日')).to eq '令和二年一月一日' }
+  end
+
+  context "with '%O%KE年%m月%d日'" do
+    it { expect(subject.to_era('%O%KE年%m月%d日')).to eq '令和02年01月01日' }
   end
 end
 

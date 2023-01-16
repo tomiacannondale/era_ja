@@ -35,6 +35,7 @@ Extra format strings provided by EraJa#to_era are:
 * %1O: era(single kanzi)
 * %E:  era year
 * %-E: era year(single digit format from 1 to 9)
+* %K:  era year(kanzi numeral) After the second year, make it a numeral
 * %J:  kanzi numeral
 
 ### Time instance to Japanese era
@@ -60,6 +61,15 @@ Date.new(2012,4,29).to_era("%O%JE年%Jm月%Jd日") # => "平成二十四年四�
 ```ruby
 Time.mktime(2012,4,29).to_era("%JY年%Jm月%Jd日") # => "二千十二年四月二十九日"
 Date.new(2012,4,29).to_era("%JY年%Jm月%Jd日")    # => "二千十二年四月二十九日"
+```
+
+The first year to be `元` and the second and subsequent years to be numbers, you can use `%K`.
+
+```ruby
+Time.mktime(2019,5,1).to_era("%O%KE年%m月%d日") # => "令和元年05月01日"
+Time.mktime(2020,5,1).to_era("%O%KE年%m月%d日") # => "令和02年05月01日"
+Date.new(2019,5,1).to_era("%O%KE年%m月%d日") # => "令和元年05月01日"
+Date.new(2020,5,1).to_era("%O%KE年%m月%d日") # => "令和02年05月01日"
 ```
 
 ### Era names ###
